@@ -28,8 +28,7 @@ class framework
 		$prefix			= $this->route->getParameter('prefix');
 		$errorClassName	= $this->route->getErrorController();
 
-		$baseClass		= $this->route->getControllerNamespace();
-		$namespaceName	= strtr($baseClass, array(
+		$namespaceName	= strtr($this->route->getControllerNamespace(), array(
 			'<basedir>'			=> ($basedir ? str_replace('/','\\',$basedir) : '')
 			, '<access>'		=> ($access ? $access : '')
 			, '<prefix>'		=> ($prefix ? $prefix:'')
@@ -41,8 +40,7 @@ class framework
 		$className		= ($controller).$this->route->getControllerSuffix();
 		$actionName		= $action.$this->route->getActionSuffix();
 	   
-		$baseDir		= $this->route->getControllerDir();
-		$folderName		= (strtr($baseDir, array(
+		$baseFolderName	= (strtr($this->route->getControllerDir(), array(
 			'<basedir>'			=> ($basedir ? str_replace('\\','/',$basedir) : '')
 			, '<access>'		=> ($access ? $access : '')
 			, '<prefix>'		=> ($prefix ? $prefix:'')
@@ -50,9 +48,10 @@ class framework
 			, '<controller>'	=> ($controller ? $controller : '')
 			, '<action>'		=> ($action ? $action : '')
 		)));
-		$fileName		= __ROOT__.'/'.($folderName.'/'.($controller).$this->route->getControllerSuffix().'.php');
-		$folderName		= preg_replace('#'.preg_quote(DS,'#').'([^'.preg_quote(DS,'#').']+).php$#','',$fileName);
+		$fileName		= __ROOT__.'/'.($baseFolderName.'/'.$className.'.php');
+		$folderName		= dirname($fileName);
 		define('__CONTROLLER_DIR__', $folderName);
+
 		$_args = array(
 			'access'	=> $access,
 			'folder'	=> $folderName,
