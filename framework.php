@@ -9,17 +9,20 @@ class framework
 	public $route;
 	public function __construct() {}
 	public function __destruct() {}
-	public static function getInstance() {       
+	public static function getInstance()
+	{       
 		if (null === self::$instance) {      
 			self::$instance = new \limepie\framework;      
 		}   
 		return self::$instance;  
 	}
-	public function setRouter($route) {
+	public function setRouter($route) 
+	{
 		$route->route();
 		$this->route = $route;
 	}
-	private function action($args = null) {
+	private function action($args = null) 
+	{
 		$access			= $this->route->getParameter('access');
 		$module			= $this->route->getParameter('module');
 		$controller		= $this->route->getParameter('controller');
@@ -93,10 +96,12 @@ class framework
 			return $this->route->setException(\limepie\_('파일 없음'), 'file_does_not_exist', $_args);
 		}
 	}
-	public function forward($config) {
+	public function forward($config) 
+	{
 		return $ret = $this->_forward($config['route'], (isset($config['args']) ? $config['args'] : array()));
 	}
-	private function _forward($array = array()) {
+	private function _forward($array = array()) 
+	{
 		$prev_route			= $this->route;
 		$router				= new \limepie\Router($array);
 		$router->setError($this->route->defaultError);
@@ -112,7 +117,8 @@ class framework
 		}
 		return $front->dispatch();
 	}
-	public function dispatch($args = null) {
+	public function dispatch($args = null) 
+	{
 		$ret = null;
 		if($config = $this->action($args)) {
 			if(is_array($config) === false && is_null($config) === false) {

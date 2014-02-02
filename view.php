@@ -2,11 +2,7 @@
 
 namespace limepie;
 
-class TplException extends \Exception 
-{ 
-}
-
-class tpl 
+class view 
 {
 	public $tpl_ = array();
 	public $var_ = array();
@@ -55,8 +51,8 @@ class tpl
 		$tpl_path		= $this->tpl_path($fid);
 		$compile_path	= $tpl_path;//.".php";
 
-		if(false == file_exists($tpl_path)) {
-			throw new TplException('템플릿 파일이 없음 : '.$tpl_path);
+		if(false == is_file($tpl_path)) {
+			throw new \limepie\view\Exception('템플릿 파일이 없음 : '.$tpl_path);
 		}
 
 		$this->_include_tpl($compile_path, $fid);//, $scope);
@@ -64,7 +60,7 @@ class tpl
 	public function _include_tpl($TPL_CPL, $TPL_TPL) {//, $TPL_SCP)
 		extract($this->var_);
 		if (false===include $TPL_CPL) {
-			throw new TplException('#'.$TPL_TPL.' include error '.$TPL_CPL);
+			throw new \limepie\view\Exception('#'.$TPL_TPL.' include error '.$TPL_CPL);
 		}
 	}
 	public function tpl_path($fid) {

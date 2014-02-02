@@ -10,7 +10,8 @@ namespace limepie;
 	));
 	$router->setError('apps_error');
 */
-class router {
+class router 
+{
 	private $pathinfo;
 	private $route					= array();
 	private	$segment				= array();
@@ -31,11 +32,13 @@ class router {
 	public	$isError				= false;
 	public	$prev;
 
-	public function __construct($route = array()){
+	public function __construct($route = array())
+	{
 		$this->setControllerDirinfo();
 		$this->route				= $route;
 	}
-	public function setException($message = '', $method = 'error', $args = array()) {
+	public function setException($message = '', $method = 'error', $args = array()) 
+	{
 		$this->isError				= true;
 		$class						= $this->getErrorController();
 		$tmpObj						= new $class;
@@ -241,6 +244,7 @@ class router {
 				break;
 			}	
 		}
+		pr($this->parameter);
 		return $this->parameter;
 	}
 }
