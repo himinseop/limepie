@@ -14,6 +14,8 @@ class router
 {
 	private $pathinfo;
 	private $route					= array();
+	private $_args					= array();
+	private $root					= "";
 	private	$segment				= array();
 	private	$parameter				= array();
 	private $basedir				= '';
@@ -79,9 +81,21 @@ class router
 			$this->setDefaultAccess($mode[0]);
 		}
 	}
-	public function setAccess($callback)
+	public function setRoot($r)
 	{
-		$callback($this);
+		$this->root = $r;
+	}
+	public function getRoot()
+	{
+		return $this->root;
+	}
+	public function setArgs($r)
+	{
+		$this->_args = $r;
+	}
+	public function getArgs()
+	{
+		return $this->_args;
 	}
 	public function setControllerDir($dir)
 	{
@@ -244,7 +258,6 @@ class router
 				break;
 			}	
 		}
-		pr($this->parameter);
 		return $this->parameter;
 	}
 }

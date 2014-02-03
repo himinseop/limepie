@@ -55,14 +55,15 @@ class framework
 		$folderName		= dirname($fileName);
 		define('__CONTROLLER_DIR__', $folderName);
 
-		$_args = array(
+		$this->route->setArgs(array(
 			'access'	=> $access,
 			'folder'	=> $folderName,
 			'file'		=> $fileName,
 			'namespace'	=> $namespaceName,
 			'class'		=> $className,
 			'method'	=> $actionName
-		);
+		));
+		$_args = $this->route->getArgs();
 		$callClassName	= $namespaceName.'\\'.$className;
 		if(($class_exist = class_exists($callClassName, false)) /* 로드됨 */ || ($file_exist = is_file($fileName)) /* 파일이 있음 */) {
 			$insObj = null;

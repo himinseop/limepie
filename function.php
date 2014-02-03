@@ -46,7 +46,7 @@ function mbstrlen($str) {
 	return $count;
 }
 
-if(!function_exists('print_p')) {
+if(!function_exists('pr')) {
 	function print_p($expression, $return = false) {
 		return pr($expression, $return);
 	}
