@@ -27,8 +27,8 @@ class router
 	private $error					= '\limepie\error';
 	private $matchRoute;
 	private $systemVariables		= array('access', 'basedir','module','action','controller','prefix'); // paramter로 받을수 없는 변수
-	private	$controllerDir			= '<basedir>/<module>/<access>';
-	private	$controllerNamespace	= '<basedir>\<module>\<access>';
+	private	$controllerDir			= '<basedir>/<module>/domain/<access>';
+	private	$controllerNamespace	= '<basedir>\<module>\domain\<access>';
 	private	$actionSuffix			= 'Action';
 	private	$controllerSuffix		= 'Controller';
 	public	$isError				= false;
@@ -71,7 +71,7 @@ class router
 	/*domain에 있을 경우 access세팅*/
 	public function setAccessByDomain($mode, $default = false)
 	{
-		if(preg_match('#((?P<access>'.implode(',|',$mode).')\.)#',$_SERVER['HTTP_HOST'], $m) 
+		if(preg_match('#((?P<access>'.implode('|',$mode).')\.)#',$_SERVER['HTTP_HOST'], $m) 
 			&& isset($m['access'])
 		) {
 			$this->setDefaultAccess($m['access']);

@@ -54,6 +54,7 @@ class framework
 		$fileName		= __ROOT__.'/'.($baseFolderName.'/'.$className.'.php');
 		$folderName		= dirname($fileName);
 		define('__CONTROLLER_DIR__', $folderName);
+		define('__ACCESS__', $access);
 
 		$this->route->setArgs(array(
 			'access'	=> $access,

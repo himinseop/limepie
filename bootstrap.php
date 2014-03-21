@@ -45,6 +45,17 @@ define('DOMAIN',		HTTP_PROTOCAL
 define('REQUEST_URI',	getenv('REQUEST_URI'));
 define('URI',			DOMAIN.REQUEST_URI);
 
+
+define('HTDOCS_FOLDER', realpath(dirname(__file__).'/..').DS);
+$_SERVER['HTDOCS_FOLDER'] = HTDOCS_FOLDER;
+
+/* folder set */
+define('DOCUMENT_FOLDER', rtrim($_SERVER['DOCUMENT_ROOT'], DS).DS);
+define('ROOT_FOLDER'	, realpath(HTDOCS_FOLDER.'..').DS);
+define('SYSTEM_FOLDER'	, realpath(HTDOCS_FOLDER.'limepie').DS);
+define('APPS_FOLDER'	, HTDOCS_FOLDER.'app'.DS);
+define('CONFIG_FOLDER'	, APPS_FOLDER.'config'.DS);
+
 /* namespace 제거 */
 function _t($msgid, $arr = null) {
 	return \limepie\_($msgid, $arr);
@@ -56,5 +67,6 @@ function __t($module, $msgid, $arr = null) {
 
 require_once("limepie/function.php");
 require_once("limepie/language.php");
+require_once(CONFIG_FOLDER."construct.php");
 
 
